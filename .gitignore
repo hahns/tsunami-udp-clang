@@ -1,5 +1,6 @@
 aclocal.m4
 autom4te.cache/*
+*.a
 *.deps*
 *.log
 *.sub
@@ -8,6 +9,7 @@ autom4te.cache/*
 Makefile
 *.in
 *.guess
+*.o
 config.h
 depcomp
 install-sh
