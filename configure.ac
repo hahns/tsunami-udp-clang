@@ -47,7 +47,7 @@ AC_CANONICAL_HOST
 # save the CFLAGS so that AC_PROG_CC doesn't overwrite them.
 
 CFLAGS_save="$CFLAGS"
-AC_PROG_CC
+AC_PROG_CC([clang])
 if test "$GCC" != "yes"; then
     AC_MSG_WARN([*** WARNING! *** You are not using the GNU C compiler.])
     AC_MSG_WARN([*** WARNING! *** Tsunami may fail to compile due to])
