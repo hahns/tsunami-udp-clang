@@ -1,4 +1,0 @@
-client/tsunami		usr/bin
-server/tsunamid		usr/sbin
-rtclient/rttsunami	usr/bin
-rtserver/rttsunamid	usr/sbin
