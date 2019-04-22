@@ -5,7 +5,7 @@ Release: 1
 License: Indiana University
 Group: VLBI
 BuildRoot: /var/tmp/tsunami-@version@-buildroot
-Requires: gcc >= 4.1.0
+Requires: clang >= 8.0.0
 Prefix: /usr
 Source: tsunami-%{version}.tar.gz
 
