@@ -69,9 +69,7 @@
 #include <unistd.h>       /* for standard Unix system calls        */
 
 #include <tsunami-client.h>
-#ifdef __linux__
-#include "../common/linux_endian.h"
-#endif
+
 //#define DEBUG_RETX xxx // enable to show retransmit debug infos
 
 /*------------------------------------------------------------------------
