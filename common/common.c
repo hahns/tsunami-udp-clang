@@ -139,15 +139,13 @@ u_int64_t get_usec_since(struct timeval *old_time)
 }
 
 
-
-#ifdef need_htonll
 /*------------------------------------------------------------------------
  * u_int64_t htonll(u_int64_t value);
  *
  * Converts the given 64-bit value in host byte order to network byte
  * order and returns it.
  *------------------------------------------------------------------------*/
-u_int64_t htonll(u_int64_t value)
+u_int64_t _htonll(u_int64_t value)
 {
     static int necessary = -1;
 
@@ -161,7 +159,6 @@ u_int64_t htonll(u_int64_t value)
     else
         return value;
 }
-#endif
 
 
 /*------------------------------------------------------------------------
@@ -186,19 +183,16 @@ char *make_transcript_filename(char *buffer, time_t epoch, const char *extension
     return buffer;
 }
 
-
-#ifdef need_ntohll
 /*------------------------------------------------------------------------
  * u_int64_t ntohll(u_int64_t value);
  *
  * Converts the given 64-bit value in network byte order to host byte
  * order and returns it.
  *------------------------------------------------------------------------*/
-u_int64_t ntohll(u_int64_t value)
+u_int64_t _ntohll(u_int64_t value)
 {
-    return htonll(value);
+    return _htonll(value);
 }
-#endif
 
 /*------------------------------------------------------------------------
  * u_char *prepare_proof(u_char *buffer, size_t bytes,

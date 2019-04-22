@@ -576,7 +576,7 @@ int ttp_open_transfer(ttp_session_t *session)
     param->epoch       = time(NULL);
 
     /* reply with the length, block size, number of blocks, and run epoch */
-    file_size   = htonll(param->file_size);    if (full_write(session->client_fd, &file_size,   8) < 0) return warn("Could not submit file size");
+    file_size   = _htonll(param->file_size);    if (full_write(session->client_fd, &file_size,   8) < 0) return warn("Could not submit file size");
     block_size  = htonl (param->block_size);   if (full_write(session->client_fd, &block_size,  4) < 0) return warn("Could not submit block size");
     block_count = htonl (param->block_count);  if (full_write(session->client_fd, &block_count, 4) < 0) return warn("Could not submit block count");
     epoch       = htonl (param->epoch);        if (full_write(session->client_fd, &epoch,       4) < 0) return warn("Could not submit run epoch");
