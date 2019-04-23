@@ -95,7 +95,7 @@ int create_tcp_socket(ttp_parameter_t *parameter)
     hints.ai_socktype = SOCK_STREAM;
 
     /* try to get address info for ourselves */
-    sprintf(buffer, "%d", parameter->tcp_port);
+    snprintf(buffer, sizeof(buffer), "%d", parameter->tcp_port);
     status = getaddrinfo(NULL, buffer, &hints, &info);
     if (status)
 	return warn("Error in getting address information");
