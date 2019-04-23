@@ -62,7 +62,7 @@ unset CFLAGS_save
 # Some CFLAGS that we need
 #
 
-EXTRA_CFLAGS="-O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64"
+EXTRA_CFLAGS="-O3 -lbsd -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64"
 
 #
 # Check for command line flags
