@@ -64,6 +64,7 @@
 #include <pthread.h>      /* for the pthreads library              */
 #include <stdlib.h>       /* for *alloc() and free()               */
 #include <string.h>       /* for standard string routines          */
+#include <bsd/string.h>       /* for standard string routines          */
 #include <sys/socket.h>   /* for the BSD socket library            */
 #include <sys/time.h>     /* for gettimeofday()                    */
 #include <time.h>         /* for time()                            */
@@ -675,7 +676,7 @@ int command_get(command_t *command, ttp_session_t *session)
        u_char *dump_file;
 
        dump_file = calloc(strlen(xfer->local_filename) + 16, sizeof(u_char));
-       strcpy((char*)dump_file, xfer->local_filename);
+       strlcpy((char*)dump_file, xfer->local_filename, sizeof((char*)dump_file));
        strcat((char*)dump_file, ".blockmap");
 
        /* write: [4 bytes block_count] [map byte 0] [map byte 1] ... [map (partial) byte N] */
@@ -855,7 +856,7 @@ int command_set(command_t *command, ttp_parameter_t *parameter)
         char *cmd = (char*)command->text[2];
         char cpy[256];
         int l = strlen(cmd);
-        strcpy(cpy, cmd);
+        strlcpy(cpy, cmd, sizeof(cpy));
         if(l>1 && (toupper(cpy[l-1]))=='M') { 
             multiplier = 1000000; cpy[l-1]='\0';  
         } else if(l>1 && toupper(cpy[l-1])=='G') { 

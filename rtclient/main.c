@@ -63,6 +63,7 @@
 #include <ctype.h>        /* for the isspace() routine             */
 #include <stdlib.h>       /* for *alloc() and free()               */
 #include <string.h>       /* for standard string routines          */
+#include <bsd/string.h>       /* for standard string routines          */
 #include <unistd.h>       /* for standard Unix system calls        */
 
 #include <tsunami.h>
@@ -131,14 +132,14 @@ int main(int argc, const char *argv[])
             if (!strcasecmp(argv[argc_curr], "close") || !strcasecmp(argv[argc_curr], "quit") 
                 || !strcasecmp(argv[argc_curr], "exit") || !strcasecmp(argv[argc_curr], "bye")
                 || !strcasecmp(argv[argc_curr], "help") || !strcasecmp(argv[argc_curr], "dir")) {
-               strcpy(command_text, argv[argc_curr]);
+               strlcpy(command_text, argv[argc_curr], sizeof(command_text));
                argc_curr += 1;
                break; 
             } 
             // single argument commands
             if (!strcasecmp(argv[argc_curr], "connect")) {
                if (argc_curr+1 < argc) {
-                  strcpy(ptr_command_text, argv[argc_curr]);
+                  strlcpy(ptr_command_text, argv[argc_curr], sizeof(ptr_command_text));
                   strcat(command_text, " ");
                   strcat(command_text, argv[argc_curr+1]);
                } else {
@@ -150,7 +151,7 @@ int main(int argc, const char *argv[])
             }
             if (!strcasecmp(argv[argc_curr], "get")) {
                if (argc_curr+1 < argc) {
-                  strcpy(ptr_command_text, argv[argc_curr]);
+                  strlcpy(ptr_command_text, argv[argc_curr], sizeof(ptr_command_text));
                   strcat(command_text, " ");
                   strcat(command_text, argv[argc_curr+1]);
                } else {
@@ -163,7 +164,7 @@ int main(int argc, const char *argv[])
             // double argument commands
             if (!strcasecmp(argv[argc_curr], "set")) {
                if (argc_curr+2 < argc) {
-                  strcpy(ptr_command_text, argv[argc_curr]);
+                  strlcpy(ptr_command_text, argv[argc_curr], sizeof(ptr_command_text));
                   strcat(command_text, " ");
                   strcat(command_text, argv[argc_curr+1]);
                   strcat(command_text, " ");
