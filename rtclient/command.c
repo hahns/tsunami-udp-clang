@@ -677,7 +677,7 @@ int command_get(command_t *command, ttp_session_t *session)
 
        dump_file = calloc(strlen(xfer->local_filename) + 16, sizeof(u_char));
        strlcpy((char*)dump_file, xfer->local_filename, sizeof((char*)dump_file));
-       strcat((char*)dump_file, ".blockmap");
+       strlcat((char*)dump_file, ".blockmap", sizeof((char*)dump_file));
 
        /* write: [4 bytes block_count] [map byte 0] [map byte 1] ... [map (partial) byte N] */
        fbits = fopen((char*)dump_file, "wb");

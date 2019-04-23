@@ -1008,7 +1008,7 @@ void dump_blockmap(const char *postfix, const ttp_transfer_t *xfer)
     /* append postfix */
     fname = calloc(strlen(xfer->local_filename) + strlen(postfix) + 1, sizeof(u_char));
     strlcpy(fname, xfer->local_filename, sizeof(fname));
-    strcat(fname, postfix);
+    strlcat(fname, postfix, sizeof(fname));
 
     /* write: [4 bytes block_count] [map byte 0] [map byte 1] ... [map N (partial final byte)] */
     fbits = fopen(fname, "wb");

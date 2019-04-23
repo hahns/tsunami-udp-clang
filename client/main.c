@@ -140,8 +140,8 @@ int main(int argc, const char *argv[])
             if (!strcasecmp(argv[argc_curr], "connect")) {
                if (argc_curr+1 < argc) {
                   strlcpy(ptr_command_text, argv[argc_curr], sizeof(ptr_command_text));
-                  strcat(command_text, " ");
-                  strcat(command_text, argv[argc_curr+1]);
+                  strlcat(command_text, " ", sizeof(command_text));
+                  strlcat(command_text, argv[argc_curr+1], sizeof(command_text));
                } else {
                   fprintf(stderr, "Connect: no host specified\n"); 
                   exit(1);
@@ -152,8 +152,8 @@ int main(int argc, const char *argv[])
             if (!strcasecmp(argv[argc_curr], "get")) {
                if (argc_curr+1 < argc) {
                   strlcpy(ptr_command_text, argv[argc_curr], sizeof(ptr_command_text));
-                  strcat(command_text, " ");
-                  strcat(command_text, argv[argc_curr+1]);
+                  strlcat(command_text, " ", sizeof(command_text));
+                  strlcat(command_text, argv[argc_curr+1], sizeof(command_text));
                } else {
                   fprintf(stderr, "Get: no file specified\n"); 
                   exit(1);
@@ -165,10 +165,10 @@ int main(int argc, const char *argv[])
             if (!strcasecmp(argv[argc_curr], "set")) {
                if (argc_curr+2 < argc) {
                   strlcpy(ptr_command_text, argv[argc_curr], sizeof(ptr_command_text));
-                  strcat(command_text, " ");
-                  strcat(command_text, argv[argc_curr+1]);
-                  strcat(command_text, " ");
-                  strcat(command_text, argv[argc_curr+2]);
+                  strlcat(command_text, " ", sizeof(command_text));
+                  strlcat(command_text, argv[argc_curr+1], sizeof(command_text));
+                  strlcat(command_text, " ", sizeof(command_text));
+                  strlcat(command_text, argv[argc_curr+2], sizeof(command_text));
                } else {
                   fprintf(stderr, "Connect: no host specified\n"); 
                   exit(1);
