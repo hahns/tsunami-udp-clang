@@ -1,10 +1,9 @@
-NEW STUFFS
+Please use llvm/clang 8.0+ for support of the bsd-style strlcpy, strlcat
+and snprintf.
 
-This repository contains a couple of additional scripts to help you to build, to deploy or to use Tsunami on Amazon Web Services (AWS)
-
-- AWS CloudFormation [template](https://raw.github.com/sebsto/tsunami-udp/master/cfn-tsunami.json) to create a Tsunami Build Server
-- Bootstrap [shell script](https://raw.github.com/sebsto/tsunami-udp/master/bootstrap.sh) to download and to build Tsunami on an Amazon EC2 Instance
-- Binaries [are available](https://github.com/sebsto/tsunami-udp/wiki/Binaries) for your convenience
+I have removed most of the linux and windows specific bits, this is a
+learning project for myself, and should not be used anywhere besides
+a lab environment.
 
 ========================================================================
 
