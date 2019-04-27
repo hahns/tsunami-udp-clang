@@ -141,10 +141,11 @@ ttp_session_t *command_connect(command_t *command, ttp_parameter_t *parameter)
 
     /* allocate a new session */
     session = (ttp_session_t *) calloc(1, sizeof(ttp_session_t));
-    if (session == NULL)
+    if (session == NULL) {
 	error("Could not allocate session object");
+    } else {
     session->parameter = parameter;
-
+    }
     /* obtain our client socket */
     server_fd = create_tcp_socket(session, parameter->server_name, parameter->server_port);
     if (server_fd < 0) {

@@ -188,39 +188,41 @@ ring_buffer_t *ring_create(ttp_session_t *session)
 
     /* try to allocate the structure */
     ring = (ring_buffer_t *) calloc(1, sizeof(*ring));
-    if (ring == NULL)
+    if (ring == NULL) {
 	error("Could not allocate ring buffer object");
+    } else {
+       /* try to allocate the buffer */
+           ring->datagram_size = 6 + session->parameter->block_size;
+           ring->datagrams = (u_char *) malloc(ring->datagram_size * MAX_BLOCKS_QUEUED);
+        
+       if (ring->datagrams == NULL)
+           error("Could not allocate buffer for ring buffer");
 
-    /* try to allocate the buffer */
-    ring->datagram_size = 6 + session->parameter->block_size;
-    ring->datagrams = (u_char *) malloc(ring->datagram_size * MAX_BLOCKS_QUEUED);
-    if (ring->datagrams == NULL)
-	error("Could not allocate buffer for ring buffer");
+       /* create the mutex */
+       status = pthread_mutex_init(&ring->mutex, NULL);
+       if (status != 0)
+           error("Could not create mutex for ring buffer");
 
-    /* create the mutex */
-    status = pthread_mutex_init(&ring->mutex, NULL);
-    if (status != 0)
-	error("Could not create mutex for ring buffer");
+       /* create the data-ready condition variable */
+       status = pthread_cond_init(&ring->data_ready_cond, NULL);
+       if (status != 0)
+           error("Could not create data-ready condition variable");
+       ring->data_ready = 0;
 
-    /* create the data-ready condition variable */
-    status = pthread_cond_init(&ring->data_ready_cond, NULL);
-    if (status != 0)
-	error("Could not create data-ready condition variable");
-    ring->data_ready = 0;
+       /* create the space-ready condition variable */
+       status = pthread_cond_init(&ring->space_ready_cond, NULL);
+       if (status != 0)
+           error("Could not create space-ready condition variable");
+       ring->space_ready = 1;
 
-    /* create the space-ready condition variable */
-    status = pthread_cond_init(&ring->space_ready_cond, NULL);
-    if (status != 0)
-	error("Could not create space-ready condition variable");
-    ring->space_ready = 1;
+       /* initialize the indices */
+       ring->count_data     = 0;
+       ring->count_reserved = 0;
+       ring->base_data      = 0;
 
-    /* initialize the indices */
-    ring->count_data     = 0;
-    ring->count_reserved = 0;
-    ring->base_data      = 0;
-
-    /* and return the ring structure */
-    return ring;
+       /* and return the ring structure */
+       return ring;
+    }
 }
 
 
