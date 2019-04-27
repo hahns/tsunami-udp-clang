@@ -139,9 +139,11 @@ int create_tcp_socket(ttp_session_t *session, const char *server_name, u_int16_t
 	    /* copy the address */
 	    session->server_address = (struct sockaddr *) malloc(info->ai_addrlen);
             session->server_address_length = info->ai_addrlen;
-	    if (session->server_address == NULL)
+	    if (session->server_address == NULL) {
 		error("Could not allocate space for server address");
-	    memcpy(session->server_address, info->ai_addr, info->ai_addrlen);
+            } else {
+	        memcpy(session->server_address, info->ai_addr, info->ai_addrlen);
+            }
 	    break;
 	}
 

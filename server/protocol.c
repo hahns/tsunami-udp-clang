@@ -319,11 +319,11 @@ int ttp_open_port(ttp_session_t *session)
       
       session->transfer.udp_length = result->ai_addrlen;
       address = (struct sockaddr *) malloc(result->ai_addrlen);
-      if (address == NULL)
+      if (address == NULL) {
          error("Could not allocate space for UDP socket address");
-
-      memcpy(address, result->ai_addr, result->ai_addrlen);
-
+      } else {
+        memcpy(address, result->ai_addr, result->ai_addrlen);
+      }
       if (result->ai_canonname != NULL)
          printf("Sending data to: %s\n", result->ai_canonname);
       freeaddrinfo(result);
