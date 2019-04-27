@@ -1006,7 +1006,7 @@ void dump_blockmap(const char *postfix, const ttp_transfer_t *xfer)
     char *fname;
 
     /* append postfix */
-    fname = calloc(strlen(xfer->local_filename) + strlen(postfix) + 1, sizeof(u_char));
+    fname = calloc(strlen(xfer->local_filename) + strlen(postfix) + 1, sizeof(char));
     strlcpy(fname, xfer->local_filename, sizeof(fname));
     strlcat(fname, postfix, sizeof(fname));
 
